@@ -15,7 +15,8 @@
     <!-- Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
       <div class="col-span-full lg:col-span-1">
-        <a class="flex-none text-xl font-semibold text-white focus:outline-none focus:opacity-80" href="#" aria-label="Brand">Yeltsin Lima</a>
+        <a class="flex-none text-xl font-semibold text-white focus:outline-none focus:opacity-80" href="#"
+          aria-label="Brand">Yeltsin Lima</a>
       </div>
       <!-- End Col -->
 
@@ -23,9 +24,24 @@
         <h4 class="font-semibold text-gray-100">Soluções</h4>
 
         <div class="mt-3 grid space-y-3">
-          <p><a class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="<?php home_url() ?>/neurodivergencia/">Neurodivergência</a></p>
-          <p><a class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Changelog</a></p>
-          <p><a class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">Docs</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/manual-tdah/">Manual do TDAH</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/saude-mental/">Saúde Mental</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/desenvolvimento-sites/">Desenvolvimento de Sites</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/manutencao-sites/">Manutenção de Sites</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/marketing-digital/">Marketing Digital</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/seguranca-digital/">Segurança Digital</a></p>
         </div>
       </div>
       <!-- End Col -->
@@ -34,10 +50,20 @@
         <h4 class="font-semibold text-gray-100">Recursos</h4>
 
         <div class="mt-3 grid space-y-3">
-          <p><a class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="<?php home_url() ?>/sobre/">Sobre</a></p>
-          <p><a class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="<?php home_url() ?>/blog/">Blog</a></p>
-          <p><a class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="<?php home_url() ?>/vagas/">Vagas</a> <span class="inline-block ms-1 text-xs bg-purple-700 text-white py-1 px-2 rounded-lg">Estamos contratando</span></p>
-          <p><a class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="<?php home_url() ?>/">Clientes</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/sobre/">Sobre</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/blog/">Blog</a></p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/vagas/">Vagas</a> <span
+              class="inline-block ms-1 text-xs bg-purple-700 text-white py-1 px-2 rounded-lg">Estamos contratando</span>
+          </p>
+          <p><a
+              class="inline-flex gap-x-2 text-gray-100 hover:text-gray-200 focus:outline-none focus:text-gray-200 dark:text-neutral-100 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+              href="<?php home_url() ?>/">Clientes</a></p>
         </div>
       </div>
       <!-- End Col -->
@@ -45,10 +71,13 @@
       <div class="col-span-2">
         <h4 class="font-semibold text-gray-100">Fique por dentro das novidades</h4>
 
-		<iframe src="https://embeds.beehiiv.com/b7697ebc-a633-4d63-be26-39c84d931a2d?slim=true" data-test-id="beehiiv-embed" height="68" class="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-lg p-2 dark:bg-neutral-900" width="100%" frameborder="0" scrolling="no"></iframe>
-		<p class="mt-3 text-sm text-gray-100">
-			Sem SPAM, desinscreva-se a qualquer momento.
-		</p>
+        <iframe src="https://embeds.beehiiv.com/b7697ebc-a633-4d63-be26-39c84d931a2d?slim=true"
+          data-test-id="beehiiv-embed" height="68"
+          class="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-lg p-2 dark:bg-neutral-900"
+          width="100%" frameborder="0" scrolling="no"></iframe>
+        <p class="mt-3 text-sm text-gray-100">
+          Sem SPAM, desinscreva-se a qualquer momento.
+        </p>
 
       </div>
       <!-- End Col -->
@@ -65,30 +94,35 @@
 
       <!-- Social Brands -->
       <div>
-        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none" href="#">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none"
+          href="https://github.com/yeltsx/rakan" target="_blank">
+          <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z"
+              clip-rule="evenodd" />
           </svg>
         </a>
-        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none" href="#">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none"
+          href="https://www.linkedin.com/in/araujoseal" target="_blank">
+          <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+              clip-rule="evenodd" />
+            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
           </svg>
+
         </a>
-        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none" href="#">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none"
+          href="https://discord.gg/njbNKBwkVG" target="_blank">
+          <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z" />
           </svg>
-        </a>
-        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none" href="#">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-          </svg>
-        </a>
-        <a class="size-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none" href="#">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M3.362 10.11c0 .926-.756 1.681-1.681 1.681S0 11.036 0 10.111C0 9.186.756 8.43 1.68 8.43h1.682v1.68zm.846 0c0-.924.756-1.68 1.681-1.68s1.681.756 1.681 1.68v4.21c0 .924-.756 1.68-1.68 1.68a1.685 1.685 0 0 1-1.682-1.68v-4.21zM5.89 3.362c-.926 0-1.682-.756-1.682-1.681S4.964 0 5.89 0s1.68.756 1.68 1.68v1.682H5.89zm0 .846c.924 0 1.68.756 1.68 1.681S6.814 7.57 5.89 7.57H1.68C.757 7.57 0 6.814 0 5.89c0-.926.756-1.682 1.68-1.682h4.21zm6.749 1.682c0-.926.755-1.682 1.68-1.682.925 0 1.681.756 1.681 1.681s-.756 1.681-1.68 1.681h-1.681V5.89zm-.848 0c0 .924-.755 1.68-1.68 1.68A1.685 1.685 0 0 1 8.43 5.89V1.68C8.43.757 9.186 0 10.11 0c.926 0 1.681.756 1.681 1.68v4.21zm-1.681 6.748c.926 0 1.682.756 1.682 1.681S11.036 16 10.11 16s-1.681-.756-1.681-1.68v-1.682h1.68zm0-.847c-.924 0-1.68-.755-1.68-1.68 0-.925.756-1.681 1.68-1.681h4.21c.924 0 1.68.756 1.68 1.68 0 .926-.756 1.681-1.68 1.681h-4.21z"/>
-          </svg>
+
+
         </a>
       </div>
       <!-- End Social Brands -->
