@@ -1,4 +1,9 @@
 # Rakan
-===
 
-This theme is based on [_tw](https://underscoretw.com/). _tw is based on a fork of _s and adds Tailwind on top of that. Since Tailwind is awesome... This theme is also awesome :3
+## Credits
+
+1. [_tw](https://underscoretw.com/)
+2. [preline](https://preline.co/index.html) 
+3. [Heroicons](https://heroicons.com/outline)
+4. [Flowbite Icons](https://flowbite.com/icons/)
+5. [Advanced Custom Fields]()
