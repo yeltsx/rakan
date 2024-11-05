@@ -30,6 +30,8 @@
 					</div>
 					<div <?php rakan_content_class('entry-content'); ?>>
 
+						<?php if (function_exists('rank_math_the_breadcrumbs')) rank_math_the_breadcrumbs(); ?>
+
 						<p class="text-purple-900"><strong>Compartilhar</strong></p>
 						<div class="sharing-buttons flex flex-wrap">
 							<a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-3 rounded-full text-white border-purple-600 bg-purple-600 hover:bg-purple-700 hover:border-purple-700"
