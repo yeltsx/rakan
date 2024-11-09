@@ -1,28 +1,23 @@
 <?php
 $hero = get_field('hero');
 if( $hero ): ?>
-<section class="pt-10 overflow-hidden bg-gray-200 md:pt-0 sm:pt-16 2xl:pt-16">
-    <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div class="grid items-center grid-cols-1 md:grid-cols-2">
-            <div>
-                <h2 class="text-4xl font-bold leading-tight text-black sm:text-4xl lg:text-4xl"><?php echo $hero['titulo']; ?></h2>
-                
-                <h3 class="text-xl font-bold text-black sm:text-2xl lg:text-2xl mt-4"><?php echo $hero['subtitulo']; ?></h3>
-                
-                <p class="max-w-lg mt-3 text-xl leading-relaxed text-gray-600 md:mt-8"><?php echo $hero['descricao']; ?></p>
-
-                <iframe src="https://embeds.beehiiv.com/b7697ebc-a633-4d63-be26-39c84d931a2d?slim=true" data-test-id="beehiiv-embed" height="52" class="max-w-lg mt-8" width="100%" frameborder="0" scrolling="no"></iframe>
-                <p class="mt-2 text-xs text-gray-500 dark:text-neutral-500">
-                    Sem SPAM, desinscreva-se a qualquer momento.
-                </p>
-            </div>
-
-            <div class="relative">
-                <img class="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2" src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg" alt="" />
-
-                <img class="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110" src="<?php echo esc_url( $hero['imagem']['url'] ); ?>" alt="" />
-            </div>
-        </div>
+<div class="relative overflow-hidden bg-gradient-to-br from-purple-700 via-purple-800 to-purple-900 text-white">
+  <div class="absolute top-0 left-0 w-32 h-32 bg-purple-600 opacity-50 rounded-full blur-xl -z-10"></div>
+  <div class="absolute bottom-0 right-0 w-48 h-48 bg-purple-500 opacity-70 rounded-full blur-2xl -z-10"></div>
+  <div class="container mx-auto max-w-[85rem] px-6 pt-16 pb-0 flex flex-col md:flex-row items-center">
+    <!-- Left Section - Text and Form -->
+    <div class="flex-1 text-center md:text-left">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4"><?php echo $hero['titulo']; ?></h1>
+      <p class="text-lg mb-6"><?php echo $hero['descricao']; ?></p>
+      <iframe src="https://embeds.beehiiv.com/b7697ebc-a633-4d63-be26-39c84d931a2d?slim=true" data-test-id="beehiiv-embed" height="52" class="max-w-lg mt-8" width="100%" frameborder="0" scrolling="no"></iframe>
     </div>
-</section>
+
+    <!-- Right Section - Image -->
+    <div class="flex-1 mt-10 md:mt-0 md:ml-10 relative flex items-end">
+      <img src="<?php echo esc_url( $hero['imagem']['url'] ); ?>" alt="Ilustração criativa" class="w-full h-auto max-w-lg mx-auto" style="object-position: bottom;" />
+      <div class="absolute top-0 -right-10 w-16 h-16 bg-purple-400 opacity-40 rounded-full blur-md"></div>
+      <div class="absolute bottom-0 -left-12 w-24 h-24 bg-purple-300 opacity-30 rounded-full blur-lg"></div>
+    </div>
+  </div>
+</div>
 <?php endif; ?>
