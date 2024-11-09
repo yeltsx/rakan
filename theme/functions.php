@@ -212,3 +212,109 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+// Register Custom Post Type Startups
+function register_startups_cpt() {
+	$labels = array(
+	  'name' => 'Startups',
+	  'singular_name' => 'Startup',
+	  'menu_name' => 'Startups',
+	  'name_admin_bar' => 'Startup'
+	);
+  
+	$args = array(
+	  'labels' => $labels,
+	  'public' => true,
+	  'has_archive' => true,
+	  'supports' => array('title', 'editor', 'thumbnail'),
+	  'show_in_rest' => true,
+	  'taxonomies' => array('area_atuacao')
+	);
+  
+	register_post_type('startups', $args);
+  }
+  add_action('init', 'register_startups_cpt');
+  
+  // Register Custom Taxonomy for Area of Expertise
+  function register_area_atuacao_taxonomy() {
+	$labels = array(
+	  'name' => 'Areas de Atuação',
+	  'singular_name' => 'Area de Atuação'
+	);
+  
+	$args = array(
+	  'labels' => $labels,
+	  'public' => true,
+	  'hierarchical' => true,
+	  'show_in_rest' => true
+	);
+  
+	register_taxonomy('area_atuacao', 'startups', $args);
+  }
+  add_action('init', 'register_area_atuacao_taxonomy');
+  
+  // Add ACF Fields for Page Content
+  if (function_exists('acf_add_local_field_group')) {
+	acf_add_local_field_group(array(
+	  'key' => 'group_about_page_fields',
+	  'title' => 'Sobre Page Fields',
+	  'fields' => array(
+		array(
+		  'key' => 'field_hero_description',
+		  'label' => 'Hero Description',
+		  'name' => 'hero_description',
+		  'type' => 'textarea'
+		),
+		array(
+		  'key' => 'field_professional_academic_experience',
+		  'label' => 'Professional and Academic Experience',
+		  'name' => 'professional_academic_experience',
+		  'type' => 'wysiwyg'
+		),
+		array(
+		  'key' => 'field_blog_theme',
+		  'label' => 'Blog/Site Theme',
+		  'name' => 'blog_theme',
+		  'type' => 'textarea'
+		),
+		array(
+		  'key' => 'field_startups_description',
+		  'label' => 'Startups Description',
+		  'name' => 'startups_description',
+		  'type' => 'textarea'
+		)
+	  ),
+	  'location' => array(
+		array(
+		  array(
+			'param' => 'page',
+			'operator' => '==',
+			'value' => 'about'
+		  )
+		)
+	  )
+	));
+  
+	// Add ACF Field for Link in Startups CPT
+	acf_add_local_field_group(array(
+	  'key' => 'group_startup_link',
+	  'title' => 'Startup Fields',
+	  'fields' => array(
+		array(
+		  'key' => 'field_startup_link',
+		  'label' => 'Link',
+		  'name' => 'link',
+		  'type' => 'url'
+		)
+	  ),
+	  'location' => array(
+		array(
+		  array(
+			'param' => 'post_type',
+			'operator' => '==',
+			'value' => 'startups'
+		  )
+		)
+	  )
+	));
+  }
