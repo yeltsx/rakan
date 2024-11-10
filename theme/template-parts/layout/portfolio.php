@@ -1,14 +1,9 @@
-<?php
-// Template for displaying Startups section
-if (have_rows('startups')):
-    while (have_rows('startups')):
-        the_row(); ?>
         <div class="bg-gradient-to-b from-white to-gray-100 py-16">
         <div class="container mx-auto max-w-[85rem] px-6">
             <div class="mx-auto max-w-lg text-center text-gray-900">
-                <h2 class="text-4xl font-bold sm:text-5xl"><?php echo get_sub_field('titulo'); ?></h2>
+                <h2 class="text-4xl font-bold sm:text-5xl">Portfolio</h2>
                 <p class="mt-4 text-lg">
-                    <?php echo get_sub_field('descricao'); ?>
+                    Saiba mais sobre todas as empresas que fundei, além de investimentos em empresas brasileiras e internacionais.
                 </p>
             </div>
 
@@ -60,6 +55,3 @@ if (have_rows('startups')):
 
         </div>
         </div>
-    <?php endwhile;
-endif;
-?>

@@ -9,6 +9,27 @@
 
 ?>
 
+<?php
+// Verifica se o anúncio está habilitado
+if( get_field('habilitar_anuncio', 'option') ):
+?>
+<div class="bg-purple-950 px-4 py-3 text-white sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+  <p class="text-center font-medium sm:text-left">
+    <strong><?php the_field('titulo_anuncio', 'option'); ?></strong>
+    <br class="sm:hidden" />
+    <?php the_field('subtitulo_anuncio', 'option'); ?>
+  </p>
+
+  <a
+    class="mt-4 block rounded-lg bg-white px-5 py-3 text-center text-sm font-medium text-purple-600 transition hover:bg-white/90 focus:outline-none focus:ring active:text-indigo-500 sm:mt-0"
+    href="<?php the_field('link_botao', 'option'); ?>"
+  >
+    <?php the_field('texto_botao', 'option'); ?>
+  </a>
+</div>
+<?php endif; ?>
+
+
 <header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7" id="masthead">
   <nav class="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-6 md:px-8 mx-auto">
     <div class="md:col-span-3">
