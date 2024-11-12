@@ -1166,94 +1166,685 @@ if (function_exists('acf_add_local_field_group')):
 endif;
 
 // Função para adicionar ao functions.php do seu tema WordPress
-function custom_stock_info_display($content) {
-    if (is_single() && in_the_loop() && is_main_query() && has_tag('ações')) {
-        global $post;
+function custom_stock_info_display($content)
+{
+	if (is_single() && in_the_loop() && is_main_query() && has_tag('ações')) {
+		global $post;
 
-        // Verificar se já existe um meta para armazenar os dados da API e a data da última atualização
-        $cached_data = get_post_meta($post->ID, '_stock_api_data', true);
-        $last_updated = get_post_meta($post->ID, '_stock_api_last_updated', true);
-        $current_time = current_time('timestamp');
+		// Verificar se já existe um meta para armazenar os dados da API e a data da última atualização
+		$cached_data = get_post_meta($post->ID, '_stock_api_data', true);
+		$last_updated = get_post_meta($post->ID, '_stock_api_last_updated', true);
+		$current_time = current_time('timestamp');
 
-        // Atualizar os dados se não existir ou se a última atualização foi há mais de um dia
-        if (!$cached_data || ($last_updated && ($current_time - $last_updated) > DAY_IN_SECONDS)) {
-            // Pegando o conteúdo do post
-            $post_content = strtolower($content);
+		// Atualizar os dados se não existir ou se a última atualização foi há mais de um dia
+		if (!$cached_data || ($last_updated && ($current_time - $last_updated) > DAY_IN_SECONDS)) {
+			// Pegando o conteúdo do post
+			$post_content = strtolower($content);
 
-            // URL da lista de ações disponíveis
-            $api_url = 'https://brapi.dev/api/available';
-            
-            // Fazendo a requisição para obter as ações disponíveis
-            $response = wp_remote_get($api_url);
-            
-            if (is_wp_error($response)) {
-                return $content; // Retornar o conteúdo original se ocorrer um erro
-            }
+			// URL da lista de ações disponíveis
+			$api_url = 'https://brapi.dev/api/available';
 
-            $body = wp_remote_retrieve_body($response);
-            $data = json_decode($body, true);
-            $stocks = $data['stocks'] ?? [];
-            
-            // Verificar quais ações estão mencionadas no post
-            $mentioned_stocks = [];
-            foreach ($stocks as $stock) {
-                if (strpos($post_content, strtolower($stock)) !== false) {
-                    $mentioned_stocks[] = $stock;
-                }
-            }
+			// Fazendo a requisição para obter as ações disponíveis
+			$response = wp_remote_get($api_url);
 
-            $cached_data = [];
+			if (is_wp_error($response)) {
+				return $content; // Retornar o conteúdo original se ocorrer um erro
+			}
 
-            // Para cada ação mencionada, buscar dados adicionais
-            foreach ($mentioned_stocks as $stock) {
-                $quote_url = "https://brapi.dev/api/quote/{$stock}?range=1d&interval=1d&fundamental=true&modules=summaryProfile&token=nXqUR2kcFhfAC5Cn6To97d";
-                $quote_response = wp_remote_get($quote_url);
+			$body = wp_remote_retrieve_body($response);
+			$data = json_decode($body, true);
+			$stocks = $data['stocks'] ?? [];
 
-                if (is_wp_error($quote_response)) {
-                    continue; // Pular esta ação se ocorrer um erro
-                }
+			// Verificar quais ações estão mencionadas no post
+			$mentioned_stocks = [];
+			foreach ($stocks as $stock) {
+				if (strpos($post_content, strtolower($stock)) !== false) {
+					$mentioned_stocks[] = $stock;
+				}
+			}
 
-                $quote_body = wp_remote_retrieve_body($quote_response);
-                $quote_data = json_decode($quote_body, true);
+			$cached_data = [];
 
-                if (isset($quote_data['results'][0])) {
-                    $cached_data[] = $quote_data['results'][0];
-                }
-            }
+			// Para cada ação mencionada, buscar dados adicionais
+			foreach ($mentioned_stocks as $stock) {
+				$quote_url = "https://brapi.dev/api/quote/{$stock}?range=1d&interval=1d&fundamental=true&modules=summaryProfile&token=nXqUR2kcFhfAC5Cn6To97d";
+				$quote_response = wp_remote_get($quote_url);
 
-            // Armazenar os dados em um meta do post para evitar novas requisições
-            update_post_meta($post->ID, '_stock_api_data', $cached_data);
-            update_post_meta($post->ID, '_stock_api_last_updated', $current_time);
-        }
+				if (is_wp_error($quote_response)) {
+					continue; // Pular esta ação se ocorrer um erro
+				}
 
-        // Gerar o conteúdo a partir dos dados armazenados
-        foreach ($cached_data as $quote) {
-            $longName = $quote['longName'] ?? '';
-            $symbol = $quote['symbol'] ?? '';
-            $industry = $quote['summaryProfile']['industry'] ?? '';
-            $website = $quote['summaryProfile']['website'] ?? '';
-            $regularMarketPreviousClose = $quote['regularMarketPreviousClose'] ?? '';
-            $logourl = $quote['logourl'] ?? '';
-            $last_updated_date = date_i18n(get_option('date_format'), $last_updated);
+				$quote_body = wp_remote_retrieve_body($quote_response);
+				$quote_data = json_decode($quote_body, true);
 
-            // Criando a tabela com Tailwind
-            $table = "<div class='my-8 p-4 border rounded-lg bg-gray-50'>";
-            $table .= "<table class='w-full text-left'>";
-            $table .= "<thead><tr><th colspan='2' class='text-lg font-bold text-gray-800'>{$longName} ({$symbol})</th></tr></thead>";
-            $table .= "<tbody>";
-            $table .= "<tr><td colspan='2' class='text-center'><img src='{$logourl}' alt='Logo de {$longName}' class='mx-auto' style='max-width: 128px; max-height: 128px;'></td></tr>";
-            $table .= "<tr><td class='font-semibold'>Valor do Último Fechamento</td><td>R$ {$regularMarketPreviousClose} <span class='text-sm text-gray-500'>(Última atualização: {$last_updated_date})</span></td></tr>";
-            $table .= "<tr><td class='font-semibold'>Empresa</td><td>{$longName} ({$symbol})</td></tr>";
-            $table .= "<tr><td class='font-semibold'>Indústria</td><td>{$industry}</td></tr>";
-            $table .= "<tr><td class='font-semibold'>Website</td><td><a href='{$website}' target='_blank' class='text-purple-500 hover:underline'>{$website}</a></td></tr>";
-            $table .= "</tbody></table></div>";
+				if (isset($quote_data['results'][0])) {
+					$cached_data[] = $quote_data['results'][0];
+				}
+			}
 
-            // Adicionar a tabela ao conteúdo do post
-            $content .= $table;
-        }
-    }
+			// Armazenar os dados em um meta do post para evitar novas requisições
+			update_post_meta($post->ID, '_stock_api_data', $cached_data);
+			update_post_meta($post->ID, '_stock_api_last_updated', $current_time);
+		}
 
-    return $content;
+		// Gerar o conteúdo a partir dos dados armazenados
+		foreach ($cached_data as $quote) {
+			$longName = $quote['longName'] ?? '';
+			$symbol = $quote['symbol'] ?? '';
+			$industry = $quote['summaryProfile']['industry'] ?? '';
+			$website = $quote['summaryProfile']['website'] ?? '';
+			$regularMarketPreviousClose = $quote['regularMarketPreviousClose'] ?? '';
+			$logourl = $quote['logourl'] ?? '';
+			$last_updated_date = date_i18n(get_option('date_format'), $last_updated);
+
+			// Criando a tabela com Tailwind
+			$table = "<div class='my-8 p-4 border rounded-lg bg-gray-50'>";
+			$table .= "<table class='w-full text-left'>";
+			$table .= "<thead><tr><th colspan='2' class='text-lg font-bold text-gray-800'>{$longName} ({$symbol})</th></tr></thead>";
+			$table .= "<tbody>";
+			$table .= "<tr><td colspan='2' class='text-center'><img src='{$logourl}' alt='Logo de {$longName}' class='mx-auto' style='max-width: 128px; max-height: 128px;'></td></tr>";
+			$table .= "<tr><td class='font-semibold'>Valor do Último Fechamento</td><td>R$ {$regularMarketPreviousClose} <span class='text-sm text-gray-500'>(Última atualização: {$last_updated_date})</span></td></tr>";
+			$table .= "<tr><td class='font-semibold'>Empresa</td><td>{$longName} ({$symbol})</td></tr>";
+			$table .= "<tr><td class='font-semibold'>Indústria</td><td>{$industry}</td></tr>";
+			$table .= "<tr><td class='font-semibold'>Website</td><td><a href='{$website}' target='_blank' class='text-purple-500 hover:underline'>{$website}</a></td></tr>";
+			$table .= "</tbody></table></div>";
+
+			// Adicionar a tabela ao conteúdo do post
+			$content .= $table;
+		}
+	}
+
+	return $content;
 }
 add_filter('the_content', 'custom_stock_info_display');
 
+// Função para registrar o shortcode
+function feriados_shortcode()
+{
+	// Conecta ao banco de dados
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'feriados';
+
+	// Verifica se a tabela já existe, senão cria
+	if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$sql = "CREATE TABLE $table_name (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            localName varchar(255) NOT NULL,
+            date date NOT NULL,
+            PRIMARY KEY  (id)
+        ) $charset_collate;";
+
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
+	}
+
+	// Obtém o ano atual
+	$current_year = date('Y');
+
+	// Verifica se os feriados para o ano atual já estão no banco de dados
+	$feriados = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name WHERE YEAR(date) = %d", $current_year));
+
+	// Se não houver dados para o ano atual, faz a requisição à API e salva no banco
+	if (empty($feriados)) {
+		atualizar_feriados();
+	}
+
+	// Gera o HTML da tabela
+	$feriados = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name WHERE YEAR(date) = %d", $current_year));
+	if (empty($feriados)) {
+		return 'Nenhum feriado encontrado para o ano atual.';
+	}
+
+	$output = '<table class="min-w-full bg-white border border-gray-300">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-200 text-left text-sm leading-4 text-gray-600">Nome do Feriado</th>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-200 text-left text-sm leading-4 text-gray-600">Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+
+	foreach ($feriados as $feriado) {
+		$date = date('d/m/Y', strtotime($feriado->date));
+		$output .= "<tr>
+                        <td class='px-6 py-4 whitespace-no-wrap border-b border-gray-300'>$feriado->localName</td>
+                        <td class='px-6 py-4 whitespace-no-wrap border-b border-gray-300'>$date</td>
+                    </tr>";
+	}
+
+	$output .= '    </tbody>
+                </table>';
+
+	return $output;
+}
+add_shortcode('feriados', 'feriados_shortcode');
+
+// Código do shortcode
+// [feriados]
+
+// Função para atualizar os feriados automaticamente todo 1º de janeiro
+function atualizar_feriados_agendamento()
+{
+	if (!wp_next_scheduled('atualizar_feriados_evento')) {
+		wp_schedule_event(strtotime('first day of January ' . date('Y')), 'yearly', 'atualizar_feriados_evento');
+	}
+}
+add_action('wp', 'atualizar_feriados_agendamento');
+
+function atualizar_feriados()
+{
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'feriados';
+
+	$current_year = date('Y');
+	$response = wp_remote_get("https://date.nager.at/api/v3/PublicHolidays/$current_year/BR");
+
+	if (!is_wp_error($response)) {
+		$data = json_decode(wp_remote_retrieve_body($response));
+
+		if (!empty($data)) {
+			// Limpa os dados antigos e insere os novos
+			$wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE YEAR(date) = %d", $current_year));
+
+			foreach ($data as $holiday) {
+				$wpdb->insert(
+					$table_name,
+					array(
+						'localName' => sanitize_text_field($holiday->localName),
+						'date' => sanitize_text_field($holiday->date)
+					)
+				);
+			}
+		}
+	}
+}
+add_action('atualizar_feriados_evento', 'atualizar_feriados');
+
+function criar_cpt_solucoes()
+{
+	$labels = array(
+		'name' => 'Soluções',
+		'singular_name' => 'Solução',
+		'menu_name' => 'Soluções',
+		'name_admin_bar' => 'Solução',
+		'add_new' => 'Adicionar Nova',
+		'add_new_item' => 'Adicionar Nova Solução',
+		'new_item' => 'Nova Solução',
+		'edit_item' => 'Editar Solução',
+		'view_item' => 'Ver Solução',
+		'all_items' => 'Todas as Soluções',
+		'search_items' => 'Procurar Soluções',
+		'not_found' => 'Nenhuma solução encontrada.',
+		'not_found_in_trash' => 'Nenhuma solução encontrada na lixeira.',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'description' => 'Custom Post Type para Soluções',
+		'public' => true,
+		'menu_icon' => 'dashicons-lightbulb',
+		'supports' => array('title', 'thumbnail'),
+		'has_archive' => true,
+		'rewrite' => array('slug' => 'solucoes'),
+	);
+
+	register_post_type('solucoes', $args);
+}
+add_action('init', 'criar_cpt_solucoes');
+
+// Certifique-se de que o ACF esteja disponível
+if (function_exists('acf_add_local_field_group')):
+
+	acf_add_local_field_group(array(
+		'key' => 'group_solucoes_conteudo',
+		'title' => 'Soluções - Conteúdo',
+		'fields' => array(
+			array(
+				'key' => 'field_conteudo_solucoes',
+				'label' => 'Conteúdo Soluções',
+				'name' => 'conteudo_solucoes',
+				'type' => 'flexible_content',
+				'layouts' => array(
+					'layout_hero' => array(
+						'key' => 'layout_hero',
+						'name' => 'hero',
+						'label' => 'Hero',
+						'display' => 'block',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_hero_titulo',
+								'label' => 'Título',
+								'name' => 'titulo',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_hero_subtitulo',
+								'label' => 'Subtítulo',
+								'name' => 'subtitulo',
+								'type' => 'textarea',
+							),
+							array(
+								'key' => 'field_hero_imagem',
+								'label' => 'Imagem',
+								'name' => 'imagem',
+								'type' => 'image',
+								'return_format' => 'array',
+								'preview_size' => 'large',
+								'library' => 'all',
+							),
+							array(
+								'key' => 'field_hero_texto_botao_primario',
+								'label' => 'Texto do Botão Primário',
+								'name' => 'texto_botao_primario',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_hero_url_botao_primario',
+								'label' => 'URL do Botão Primário',
+								'name' => 'url_botao_primario',
+								'type' => 'url',
+							),
+							array(
+								'key' => 'field_hero_texto_botao_secundario',
+								'label' => 'Texto do Botão Secundário',
+								'name' => 'texto_botao_secundario',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_hero_url_botao_secundario',
+								'label' => 'URL do Botão Secundário',
+								'name' => 'url_botao_secundario',
+								'type' => 'url',
+							),
+							array(
+								'key' => 'field_hero_badge_texto',
+								'label' => 'Texto do Badge',
+								'name' => 'badge_texto',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_hero_badge_icone',
+								'label' => 'Ícone do Badge (SVG)',
+								'name' => 'badge_icone',
+								'type' => 'textarea',
+								'instructions' => 'Cole aqui o código SVG do ícone do badge.',
+							),
+						),
+					),
+					'layout_descricao' => array(
+						'key' => 'layout_descricao',
+						'name' => 'descricao',
+						'label' => 'Descrição',
+						'display' => 'block',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_descricao_titulo',
+								'label' => 'Título',
+								'name' => 'titulo',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_descricao_conteudo',
+								'label' => 'Conteúdo',
+								'name' => 'conteudo',
+								'type' => 'wysiwyg',
+							),
+						),
+					),
+					'layout_funcionalidades' => array(
+						'key' => 'layout_funcionalidades',
+						'name' => 'funcionalidades',
+						'label' => 'Funcionalidades',
+						'display' => 'block',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_funcionalidades_titulo',
+								'label' => 'Título da Seção',
+								'name' => 'titulo',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_funcionalidades_lista',
+								'label' => 'Lista de Funcionalidades',
+								'name' => 'lista_de_funcionalidades',
+								'type' => 'repeater',
+								'sub_fields' => array(
+									array(
+										'key' => 'field_funcionalidades_svg_code',
+										'label' => 'Código SVG',
+										'name' => 'svg_code',
+										'type' => 'textarea',
+										'instructions' => 'Cole aqui o código SVG do ícone. Certifique-se de que o SVG seja seguro e não contenha código malicioso.',
+									),
+									array(
+										'key' => 'field_funcionalidades_titulo_item',
+										'label' => 'Título',
+										'name' => 'titulo',
+										'type' => 'text',
+									),
+									array(
+										'key' => 'field_funcionalidades_descricao',
+										'label' => 'Descrição',
+										'name' => 'descricao',
+										'type' => 'textarea',
+									),
+								),
+								'min' => 0,
+								'layout' => 'row',
+								'button_label' => 'Adicionar Funcionalidade',
+							),
+						),
+					),
+					'layout_texto_e_imagem' => array(
+						'key' => 'layout_texto_e_imagem',
+						'name' => 'texto_e_imagem',
+						'label' => 'Texto e Imagem',
+						'display' => 'block',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_texto_imagem_titulo',
+								'label' => 'Título',
+								'name' => 'titulo',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_texto_imagem_conteudo',
+								'label' => 'Conteúdo',
+								'name' => 'conteudo',
+								'type' => 'wysiwyg',
+							),
+							array(
+								'key' => 'field_texto_imagem_imagem',
+								'label' => 'Imagem',
+								'name' => 'imagem',
+								'type' => 'image',
+								'return_format' => 'array',
+								'preview_size' => 'medium',
+								'library' => 'all',
+							),
+						),
+					),
+					'layout_texto_e_imagem' => array(
+						'key' => 'layout_texto_e_imagem',
+						'name' => 'texto_e_imagem',
+						'label' => 'Texto e Imagem',
+						'display' => 'block',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_texto_imagem_titulo',
+								'label' => 'Título',
+								'name' => 'titulo',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_texto_imagem_conteudo',
+								'label' => 'Conteúdo',
+								'name' => 'conteudo',
+								'type' => 'wysiwyg',
+							),
+							array(
+								'key' => 'field_texto_imagem_imagem',
+								'label' => 'Imagem',
+								'name' => 'imagem',
+								'type' => 'image',
+								'return_format' => 'array',
+								'preview_size' => 'medium',
+								'library' => 'all',
+							),
+							array(
+								'key' => 'field_texto_imagem_texto_botao',
+								'label' => 'Texto do Botão',
+								'name' => 'texto_do_botao',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_texto_imagem_url_botao',
+								'label' => 'URL do Botão',
+								'name' => 'url_do_botao',
+								'type' => 'url',
+							),
+						),
+					),
+					'layout_video_e_texto_esquerda' => array(
+                    'key' => 'layout_video_e_texto_esquerda',
+                    'name' => 'video_e_texto_esquerda_video',
+                    'label' => 'Vídeo e Texto (Esquerda, texto)',
+                    'display' => 'block',
+                    'sub_fields' => array(
+                        array(
+                            'key' => 'field_video_texto_esquerda_titulo',
+                            'label' => 'Título',
+                            'name' => 'titulo',
+                            'type' => 'text',
+                        ),
+                        array(
+                            'key' => 'field_video_texto_esquerda_conteudo',
+                            'label' => 'Conteúdo',
+                            'name' => 'conteudo',
+                            'type' => 'wysiwyg',
+                        ),
+                        array(
+                            'key' => 'field_video_texto_esquerda_iframe',
+                            'label' => 'Código do Iframe',
+                            'name' => 'iframe_do_video',
+                            'type' => 'textarea',
+                            'instructions' => 'Insira o código do iframe do vídeo aqui. Certifique-se de que o código seja seguro.',
+                        ),
+                    ),
+                ),
+					'layout_video_e_texto_topo' => array(
+                    'key' => 'layout_video_e_texto_topo',
+                    'name' => 'video_e_texto_video_no_topo',
+                    'label' => 'Vídeo e Texto (Vídeo no topo)',
+                    'display' => 'block',
+                    'sub_fields' => array(
+                        array(
+                            'key' => 'field_video_texto_topo_titulo',
+                            'label' => 'Título',
+                            'name' => 'titulo',
+                            'type' => 'text',
+                        ),
+                        array(
+                            'key' => 'field_video_texto_topo_conteudo',
+                            'label' => 'Conteúdo',
+                            'name' => 'conteudo',
+                            'type' => 'wysiwyg',
+                        ),
+                        array(
+                            'key' => 'field_video_texto_topo_iframe',
+                            'label' => 'Código do Iframe',
+                            'name' => 'iframe_do_video',
+                            'type' => 'textarea',
+                            'instructions' => 'Insira o código do iframe do vídeo aqui. Certifique-se de que o código seja seguro.',
+                        ),
+                    ),
+                ),
+					'layout_depoimentos' => array(
+						'key' => 'layout_depoimentos',
+						'name' => 'depoimentos',
+						'label' => 'Depoimentos',
+						'display' => 'block',
+						'sub_fields' => array(
+							// Nenhum campo adicional necessário, pois os depoimentos são puxados das opções
+						),
+					),
+					'layout_tabela_de_precos' => array(
+						'key' => 'layout_tabela_de_precos',
+						'name' => 'tabela_de_precos',
+						'label' => 'Tabela de Preços',
+						'display' => 'block',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_tabela_precos_titulo',
+								'label' => 'Título',
+								'name' => 'titulo',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_tabela_precos_descricao',
+								'label' => 'Descrição',
+								'name' => 'descricao',
+								'type' => 'wysiwyg',
+							),
+							array(
+								'key' => 'field_tabela_precos_planos',
+								'label' => 'Planos',
+								'name' => 'planos',
+								'type' => 'repeater',
+								'sub_fields' => array(
+									array(
+										'key' => 'field_tabela_precos_nome_plano',
+										'label' => 'Nome do Plano',
+										'name' => 'nome_do_plano',
+										'type' => 'text',
+									),
+									array(
+										'key' => 'field_tabela_precos_preco',
+										'label' => 'Preço',
+										'name' => 'preco',
+										'type' => 'text',
+									),
+									array(
+										'key' => 'field_tabela_precos_periodo',
+										'label' => 'Período',
+										'name' => 'periodo',
+										'type' => 'text',
+									),
+									array(
+										'key' => 'field_tabela_precos_caracteristicas',
+										'label' => 'Características',
+										'name' => 'caracteristicas',
+										'type' => 'repeater',
+										'sub_fields' => array(
+											array(
+												'key' => 'field_caracteristica_item',
+												'label' => 'Item',
+												'name' => 'item',
+												'type' => 'text',
+											),
+										),
+										'min' => 0,
+										'layout' => 'table',
+										'button_label' => 'Adicionar Característica',
+									),
+									array(
+										'key' => 'field_tabela_precos_link',
+										'label' => 'Link',
+										'name' => 'link',
+										'type' => 'url',
+									),
+									array(
+										'key' => 'field_tabela_precos_destaque',
+										'label' => 'Plano em Destaque',
+										'name' => 'destaque',
+										'type' => 'true_false',
+										'ui' => 1,
+										'ui_on_text' => 'Sim',
+										'ui_off_text' => 'Não',
+									),
+								),
+								'min' => 0,
+								'layout' => 'row',
+								'button_label' => 'Adicionar Plano',
+							),
+						),
+					),
+					'layout_formulario_de_contato' => array(
+						'key' => 'layout_formulario_de_contato',
+						'name' => 'formulario_de_contato',
+						'label' => 'Formulário de Contato',
+						'display' => 'block',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_formulario_contato_titulo',
+								'label' => 'Título',
+								'name' => 'titulo',
+								'type' => 'text',
+							),
+							array(
+								'key' => 'field_formulario_contato_descricao',
+								'label' => 'Descrição',
+								'name' => 'descricao',
+								'type' => 'wysiwyg',
+							),
+							array(
+								'key' => 'field_formulario_contato_shortcode',
+								'label' => 'Shortcode do Formulário',
+								'name' => 'shortcode_do_formulario',
+								'type' => 'text',
+							),
+						),
+					),
+				),
+				'button_label' => 'Adicionar Seção',
+				'min' => '',
+				'max' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'solucoes',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal', // 'acf_after_title' para exibir abaixo do título
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+	));
+
+endif;
+
+// Certifique-se de que o ACF esteja disponível
+if( function_exists('acf_add_local_field_group') ):
+
+// Grupo de Campos "Home" para o CPT "solucoes"
+acf_add_local_field_group(array(
+    'key' => 'group_home_solucoes',
+    'title' => 'Home',
+    'fields' => array(
+        array(
+            'key' => 'field_home_svg_code',
+            'label' => 'Código SVG',
+            'name' => 'home_svg_code',
+            'type' => 'textarea',
+            'instructions' => 'Insira o código SVG aqui. Certifique-se de que o SVG seja seguro e não contenha código malicioso.',
+        ),
+        array(
+            'key' => 'field_home_titulo',
+            'label' => 'Título',
+            'name' => 'home_titulo',
+            'type' => 'text',
+        ),
+        array(
+            'key' => 'field_home_descricao',
+            'label' => 'Descrição',
+            'name' => 'home_descricao',
+            'type' => 'textarea',
+        ),
+    ),
+    'location' => array(
+        array(
+            array(
+                'param' => 'post_type',
+                'operator' => '==',
+                'value' => 'solucoes',
+            ),
+        ),
+    ),
+    'menu_order' => 0,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+    'hide_on_screen' => '',
+));
+
+endif;

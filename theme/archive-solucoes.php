@@ -1,4 +1,15 @@
 <?php
+get_header();
+
+// Seção Hero
+?>
+<section class="bg-purple-700 py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold text-white">Soluções</h1>
+    </div>
+</section>
+
+<?php
 // Query para obter os posts do CPT "solucoes"
 $args = array(
     'post_type'      => 'solucoes',
@@ -90,4 +101,6 @@ if ( $solucoes_query->have_posts() ) : ?>
 <?php endif;
 // Resetar dados do post
 wp_reset_postdata();
+
+get_footer();
 ?>
