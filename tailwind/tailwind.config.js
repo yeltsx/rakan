@@ -33,7 +33,10 @@ module.exports = {
 
 		// Uncomment below to add additional first-party Tailwind plugins.
 		require('@tailwindcss/forms'),
-		require('preline/plugin')
+		require('preline/plugin'),
+		require('flowbite/plugin')({
+			datatables: true,
+		}),
 		// require('@tailwindcss/aspect-ratio'),
 		// require('@tailwindcss/container-queries'),
 	],

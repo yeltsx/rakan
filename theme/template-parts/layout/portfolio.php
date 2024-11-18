@@ -1,9 +1,9 @@
         <div class="bg-gradient-to-b from-white to-gray-100 py-16">
         <div class="container mx-auto max-w-[85rem] px-6">
             <div class="mx-auto max-w-lg text-center text-gray-900">
-                <h2 class="text-4xl font-bold sm:text-5xl">Portfolio</h2>
+                <h2 class="text-3xl font-bold sm:text-5xl">Startups</h2>
                 <p class="mt-4 text-lg">
-                    Saiba mais sobre todas as empresas que fundei, além de investimentos em empresas brasileiras e internacionais.
+                    Abaixo você encontra uma lista de todas as startups que criei e que ainda estão em operação. Saiba mais sobre elas.
                 </p>
             </div>
 
@@ -27,7 +27,7 @@
                                 $terms = get_the_terms(get_the_ID(), 'area_atuacao');
                                 if ($terms && !is_wp_error($terms)) :
                                     foreach ($terms as $term) : ?>
-                                        <span class="inline-block bg-purple-200 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                                        <span class="inline-block bg-purple-900 text-white text-xs font-semibold px-3 py-1 rounded-full mb-2">
                                             <?php echo esc_html($term->name); ?>
                                         </span>
                                     <?php endforeach;
@@ -37,9 +37,9 @@
                                     <?php the_excerpt(); ?>
                                 </div>
                                 <?php if (get_field('link')) : ?>
-                                    <a href="<?php the_field('link'); ?>" target="_blank" class="inline-flex items-center px-6 py-3 mt-auto text-sm font-semibold text-purple-700 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-opacity-50 transition dark:bg-purple-800 dark:text-white dark:hover:bg-purple-700">
-                                        Acessar website
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4 text-purple-700 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <a href="<?php the_field('link'); ?>" target="_blank" class="inline-flex items-center px-6 py-3 mt-auto text-sm font-semibold text-white bg-purple-900 rounded-lg hover:bg-purple-950 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-opacity-50 transition dark:bg-purple-800 dark:text-white dark:hover:bg-purple-700">
+                                        Visitar
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4 text-white dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
                                         </svg>
                                     </a>

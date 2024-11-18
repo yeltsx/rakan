@@ -63,4 +63,8 @@
  .gfield_error .validation_message {
    @apply text-red-600 text-sm mt-1;
  }
+
+ hr {
+  @apply w-48 h-2 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700;
+ }
  

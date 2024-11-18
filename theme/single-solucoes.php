@@ -89,7 +89,7 @@ while (have_posts()):
                     $badge_texto = get_sub_field('badge_texto');
                     $badge_icone = get_sub_field('badge_icone');
                     ?>
-                    <section class="mb-16 container mx-auto max-w-[85rem]">
+                    <section class="my-16 container mx-auto max-w-[85rem]">
                         <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
                             <div class="flex justify-end bg-zinc-100">
                                 <?php if ($imagem): ?>
@@ -100,7 +100,7 @@ while (have_posts()):
                             <div class="flex flex-col items-center text-center lg:max-w-3xl lg:items-start lg:text-left">
                                 <?php if ($badge_texto): ?>
                                     <div
-                                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-purple-600 text-white hover:bg-purple-700">
+                                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-purple-900 text-white hover:bg-purple-950">
                                         <?php echo esc_html($badge_texto); ?>
                                         <?php if ($badge_icone): ?>
                                             <span class="ml-2">
@@ -135,7 +135,7 @@ while (have_posts()):
                                         <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
-                                <h1 class="my-6 text-3xl font-bold text-purple-800 lg:text-5xl xl:text-5xl">
+                                <h1 class="my-6 text-3xl font-bold text-purple-950 lg:text-3xl xl:text-3xl">
                                     <?php echo esc_html($titulo); ?>
                                 </h1>
                                 <p class="mb-8 max-w-xl text-zinc-600 lg:text-xl">
@@ -144,13 +144,13 @@ while (have_posts()):
                                 <div class="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
                                     <?php if ($texto_botao_primario && $url_botao_primario): ?>
                                         <a href="<?php echo esc_url($url_botao_primario); ?>"
-                                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-purple-700 text-white hover:bg-purple-800 h-10 px-4 py-2 w-full sm:w-auto">
+                                            class="inline-flex items-center justify-center whitespace-nowrap rounded text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-purple-900 text-white hover:bg-purple-950 h-10 px-4 py-2 w-full sm:w-auto">
                                             <?php echo esc_html($texto_botao_primario); ?>
                                         </a>
                                     <?php endif; ?>
                                     <?php if ($texto_botao_secundario && $url_botao_secundario): ?>
                                         <a href="<?php echo esc_url($url_botao_secundario); ?>"
-                                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-white text-purple-700 hover:bg-purple-100 hover:text-purple-800 h-10 px-4 py-2 w-full sm:w-auto">
+                                            class="inline-flex items-center justify-center whitespace-nowrap rounded text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-white text-purple-900 hover:bg-purple-100 hover:text-purple-800 h-10 px-4 py-2 w-full sm:w-auto">
                                             <?php echo esc_html($texto_botao_secundario); ?>
                                             <!-- Ícone opcional no botão secundário -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24"
@@ -173,8 +173,8 @@ while (have_posts()):
                     ?>
                     <section class="descricao py-16">
                         <div class="container mx-auto max-w-[85rem] px-6">
-                            <h2 class="text-4xl font-bold text-purple-950 text-center"><?php echo esc_html($titulo); ?></h2>
-                            <div class="mt-6 prose text-lg">
+                            <h2 class="text-3xl font-bold text-purple-950 text-center"><?php echo esc_html($titulo); ?></h2>
+                            <div class="mt-6 prose text-xl">
                                 <?php echo wp_kses_post($conteudo); ?>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ while (have_posts()):
                     ?>
                     <section class="bg-white">
                         <div class="container mx-auto max-w-[85rem] max-w-[85rem] px-6 py-10">
-                        <h2 class="text-4xl font-bold text-purple-950 text-center"><?php echo esc_html($titulo); ?></h2>
+                        <h2 class="text-3xl font-bold text-purple-950 text-center"><?php echo esc_html($titulo); ?></h2>
 
                             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-16 md:grid-cols-2 xl:grid-cols-3">
                                 <?php if (have_rows('lista_de_funcionalidades')):
@@ -275,21 +275,21 @@ while (have_posts()):
                                     </div>
                                 </div>
 
-                                <div class="relative flex items-center bg-gray-200">
-                                    <span class="hidden lg:absolute lg:inset-y-0 lg:-left-16 lg:block lg:w-16 lg:bg-gray-200"></span>
+                                <div class="relative flex items-center bg-purple-200">
+                                    <span class="hidden lg:absolute lg:inset-y-0 lg:-left-16 lg:block lg:w-16 lg:bg-purple-200"></span>
 
                                     <div class="p-8 sm:p-16 lg:p-24">
                                         <h2 class="text-2xl font-bold sm:text-3xl">
                                             <?php echo esc_html($titulo); ?>
                                         </h2>
 
-                                        <div class="mt-4 prose text-gray-600">
+                                        <div class="mt-4 prose text-black">
                                             <?php echo wp_kses_post($conteudo); ?>
                                         </div>
 
                                         <?php if ($texto_botao && $url_botao): ?>
                                             <a href="<?php echo esc_url($url_botao); ?>"
-                                                class="mt-8 inline-block rounded border border-purple-600 bg-purple-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-purple-600 focus:outline-none focus:ring active:text-purple-500">
+                                                class="mt-8 inline-block rounded border border-purple-900 bg-purple-900 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-purple-950 focus:outline-none focus:ring active:text-purple-950 transition-all ease-in-out">
                                                 <?php echo esc_html($texto_botao); ?>
                                             </a>
                                         <?php endif; ?>
@@ -314,7 +314,7 @@ while (have_posts()):
                                 <?php endif; ?>
                             </div>
                             <div class="md:w-1/2 mt-8 md:mt-0">
-                                <h2 class="text-4xl font-bold text-purple-600"><?php echo esc_html($titulo); ?></h2>
+                                <h2 class="text-3xl font-bold text-purple-600"><?php echo esc_html($titulo); ?></h2>
                                 <div class="mt-6 text-lg">
                                     <?php echo wp_kses_post($conteudo); ?>
                                 </div>
@@ -333,7 +333,7 @@ while (have_posts()):
                         <div class="container mx-auto max-w-[85rem] px-4">
                             <div class="grid items-center gap-8 lg:grid-cols-2">
                                 <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
-                                    <h1 class="my-6 text-3xl font-bold lg:text-4xl text-purple-800">
+                                    <h1 class="my-6 text-3xl font-bold lg:text-4xl text-purple-950">
                                         <?php echo esc_html($titulo); ?>
                                     </h1>
                                     <div class="mb-8 max-w-xl text-zinc-600 lg:text-lg prose">
@@ -373,10 +373,10 @@ while (have_posts()):
                         <section>
                           <div class="container mx-auto max-w-[85rem] px-4 py-16">
                           <div class="mb-16 flex flex-col items-center text-center">
-                              <h1 class="mb-8 max-w-6xl text-4xl font-semibold leading-none tracking-tight text-gray-800 md:text-7xl">
+                              <h1 class="mb-8 max-w-6xl text-3xl font-semibold leading-none tracking-tight text-gray-800 md:text-3xl">
                                 <?php echo esc_html($titulo); ?>
                               </h1>
-                              <div class="max-w-3xl prose prose-lg text-gray-500">
+                              <div class="max-w-3xl prose prose-lg text-black">
                                 <?php echo wp_kses_post($conteudo); ?>
                               </div>
                             </div>
@@ -483,7 +483,7 @@ while (have_posts()):
                     <section id="precos" class="tabela-de-precos py-16 bg-gradient-to-b from-gray-100 to-gray-200">
                         <div class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
                             <div class="text-center">
-                                <h2 class="text-4xl font-bold text-purple-600"><?php echo esc_html($titulo); ?></h2>
+                                <h2 class="text-3xl font-bold text-purple-950"><?php echo esc_html($titulo); ?></h2>
                                 <div class="mt-6 text-lg">
                                     <?php echo wp_kses_post($descricao); ?>
                                 </div>
@@ -501,15 +501,15 @@ while (have_posts()):
                                         $destaque = get_sub_field('destaque');
 
                                         // Classes CSS baseadas no destaque
-                                        $border_class = $destaque ? 'border-purple-600' : 'border-gray-200';
-                                        $bg_class = $destaque ? 'bg-purple-600' : 'bg-white';
+                                        $border_class = $destaque ? 'border-purple-900' : 'border-gray-200';
+                                        $bg_class = $destaque ? 'bg-purple-900' : 'bg-white';
                                         $text_class = $destaque ? 'text-gray-900' : 'text-gray-900';
-                                        $ring_class = $destaque ? 'ring-1 ring-purple-600' : '';
-                                        $button_class = $destaque ? 'bg-white text-purple hover:bg-gray-100' : 'bg-purple-600 text-white hover:bg-purple-700';
+                                        $ring_class = $destaque ? 'ring-1 ring-purple-900' : '';
+                                        $button_class = $destaque ? 'bg-white text-purple hover:bg-gray-100' : 'bg-purple-900 text-white hover:bg-purple-950';
                                         $text_secondary_class = $destaque ? 'text-gray-700' : 'text-gray-700';
                                         ?>
                                         <div
-                                            class="rounded-2xl border <?php echo $border_class; ?> p-6 shadow-sm <?php echo $ring_class; ?> sm:px-8 lg:p-12">
+                                            class="rounded border <?php echo $border_class; ?> p-6 shadow-sm <?php echo $ring_class; ?> sm:px-8 lg:p-12">
                                             <div class="text-center">
                                                 <h2 class="text-lg font-medium <?php echo $text_class; ?>">
                                                     <?php echo esc_html($nome_plano); ?>
@@ -542,7 +542,7 @@ while (have_posts()):
 
                                             <?php if ($link): ?>
                                                 <a href="<?php echo esc_url($link); ?>"
-                                                    class="mt-8 block rounded-full border border-indigo-600 px-12 py-3 text-center text-sm font-medium <?php echo $button_class; ?> hover:ring-1 hover:ring-indigo-600 focus:outline-none focus:ring active:text-indigo-500">
+                                                    class="mt-8 block rounded border border-purple-950 px-12 py-3 text-center text-sm font-medium <?php echo $button_class; ?> hover:ring-1 hover:ring-purple-950 focus:outline-none focus:ring active:text-purple-950">
                                                     Contrate Agora
                                                 </a>
                                             <?php endif; ?>

@@ -67,8 +67,8 @@
 
 <?php if (have_rows('depoimentos', 'option')) : ?>
     <section class="bg-white mt-16">
-        <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-            <h2 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <div class="mx-auto max-w-screen-xl px-4 py-6 sm:px-6 lg:px-8 lg:py-16">
+            <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
                 Confira alguns depoimentos de clientes
             </h2>
 

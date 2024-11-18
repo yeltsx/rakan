@@ -55,6 +55,8 @@
 	},
 	"prettier": "@wordpress/prettier-config",
 	"dependencies": {
-		"preline": "^2.5.1"
+		"flowbite": "^2.5.2",
+		"preline": "^2.5.1",
+		"simple-datatables": "^9.2.1"
 	}
 }
