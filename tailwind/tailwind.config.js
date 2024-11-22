@@ -14,9 +14,9 @@ module.exports = {
 	theme: {
 		// Extend the default Tailwind theme.
 		fontFamily: {
-			'sans': ['"Red Hat Text"', 'ui-sans-serif'],
-			'serif': ['"Aleo"', 'ui-serif'],
-      		'mono': ['"Red Hat Mono"', 'ui-serif']
+			'sans': ['"Satoshi-Variable"', 'ui-sans-serif'],
+			'serif': ['"GeneralSans-Variable"', 'ui-sans-serif'],
+      		'mono': ['"Switzer-Variable"', 'ui-sans-serif']
 		},
 		extend: {},
 	},

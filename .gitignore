@@ -16,3 +16,7 @@ rakan.zip
 
 # Ignore .DS_Store files from macOS:
 .DS_Store
+
+
+#Ignore API
+/theme/inc/api.php

@@ -44,6 +44,42 @@ if( $hero ): ?>
 </section>
 <?php endif; ?>
 
+<?php if( have_rows('timeline') ): ?>
+<section class="timeline-section py-12">
+    <div class="container mx-auto max-w-[85rem] px-6">
+        <h2 class="text-3xl font-bold mb-8">Linha do Tempo</h2>
+        <ol class="relative border-l border-gray-200 dark:border-gray-700">
+            <?php while ( have_rows('timeline') ) : the_row(); 
+                $data = get_sub_field('data');
+                $titulo = get_sub_field('titulo');
+                $descricao = get_sub_field('descricao');
+                $botao = get_sub_field('botao'); 
+            ?>
+            <li class="mb-10 ml-6">
+                <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-200 rounded-full -left-4 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16M8 14h8m-4-7V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/>
+</svg>
+
+                </span>
+                <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500"><?php echo esc_html($data); ?></time>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white"><?php echo esc_html($titulo); ?></h3>
+                <div class="mb-4 prose dark:prose-dark">
+                    <?php echo wp_kses_post($descricao); ?>
+                </div>
+                <?php if( $botao ): ?>
+                <a href="<?php echo esc_url($botao['url']); ?>" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <?php echo esc_html($botao['title']); ?>
+                </a>
+                <?php endif; ?>
+            </li>
+            <?php endwhile; ?>
+        </ol>
+    </div>
+</section>
+<?php endif; ?>
+
+
 
 <?php
 get_footer();

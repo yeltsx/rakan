@@ -304,3 +304,48 @@ if ( ! function_exists( 'rakan_content_class' ) ) :
 		echo 'class="' . esc_attr( implode( ' ', $combined_classes ) ) . '"';
 	}
 endif;
+
+function custom_alert_shortcode($atts)
+{
+	$atts = shortcode_atts(
+		array(
+			'tipo' => 'info',
+			'titulo' => '',
+			'mensagem' => '',
+		),
+		$atts,
+		'alerta'
+	);
+
+	$output = '';
+
+	switch ($atts['tipo']) {
+		case 'sucesso':
+			$output = '<div class="relative w-full rounded-lg border border-transparent bg-blue-600 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-white">'
+				. '<svg class="w-5 h-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>'
+				. '<h5 class="mb-1 font-medium leading-none tracking-tight">' . esc_html($atts['titulo']) . '</h5>'
+				. '<div class="text-sm opacity-80">' . esc_html($atts['mensagem']) . '</div>'
+				. '</div>';
+			break;
+
+		case 'alerta':
+			$output = '<div class="relative w-full rounded-lg border border-transparent bg-red-600 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-white">'
+				. '<svg class="w-5 h-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>'
+				. '<h5 class="mb-1 font-medium leading-none tracking-tight">' . esc_html($atts['titulo']) . '</h5>'
+				. '<div class="text-sm opacity-80">' . esc_html($atts['mensagem']) . '</div>'
+				. '</div>';
+			break;
+
+		case 'info':
+		default:
+			$output = '<div class="relative w-full rounded-lg border border-transparent bg-yellow-500 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-white">'
+				. '<svg class="w-5 h-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z" /></svg>'
+				. '<h5 class="mb-1 font-medium leading-none tracking-tight">' . esc_html($atts['titulo']) . '</h5>'
+				. '<div class="text-sm opacity-80">' . esc_html($atts['mensagem']) . '</div>'
+				. '</div>';
+			break;
+	}
+
+	return $output;
+}
+add_shortcode('alerta', 'custom_alert_shortcode');
